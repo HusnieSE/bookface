@@ -9,14 +9,39 @@
         <% user = User.find_by_id(post.user_id) %>
         <%= user[:name] %> 
     </p>
+    <small> <%= post.created_at.strftime("%d %B %Y, %H:%M") %> </small>
     </br>
     <%= post.contents %>
     </br>
-    <p> <%= post.created_at.strftime("%d %B %Y, %H:%M") %> </p>
     <% if post.user_id == current_user[:id] %>
       <%= form_tag(posts_url, method: :delete, class: 'create-post') do %>
         <%= button_tag "Delete", name: "post_id", value: post.id %>
       <% end %>
     <% end %>
+    
+    <% 
+      comments = Comment.all
+      comments = comments.select { |comment| post.id == comment.post_id}
+    %>
+    <% if comments %>
+      <% $stderr.puts (comments.inspect) %>
+      <% comments.each do |comment| %>
+        <div class="post-container"> 
+          <p> <%= comment.contents %> </p>
+          <p> <%= comment.created_at.strftime("%d %B %Y, %H:%M") %> </p>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="post-container">
+      <%= form_tag(comments_url, method: :post, class: 'create-post') do %>
+        <textarea name="contents"></textarea>
+        <%=  hidden_field_tag 'post_id', value: post.id %>
+        <%=  hidden_field_tag 'user_id', value: current_user[:id] %>
+        <div class="button-container"><button>Submit</button></div>
+      <% end %>
+    </div>
+  </div>
+    
   </div>
 <% end %>
