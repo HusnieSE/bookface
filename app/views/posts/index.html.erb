@@ -6,5 +6,7 @@
 <% @posts.each do |post| %>
   <div class="post-container">
     <%= post.contents %>
+    </br>
+    <p> <%= post.created_at.strftime("%d %B %Y, %H:%M") %> </p>
   </div>
 <% end %>
