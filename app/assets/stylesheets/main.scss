@@ -1,0 +1,42 @@
+$blue: #3FAFD7;
+
+* { box-sizing: border-box; }
+:first-child { margin-top: 0; }
+:last-child { margin-bottom: 0; }
+
+body {
+  font: 1em/1 sans-serif;
+  margin: 0 auto;
+  padding: 2rem;
+  background: $blue;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main main main';
+  grid-gap: 2px;
+}
+
+.grid-container > div {
+  background-color: lighten($blue, 40%);
+}
+
+.header {
+  grid-area: header;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.menu {
+  grid-area: menu;
+}
+
+.main {
+  grid-area: main;
+}
+
+.menu, .main {
+  padding: 1.25rem 1rem;
+}

@@ -1,0 +1,28 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.post-container,
+form.create-post textarea {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  background: #fff;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+form.create-post {
+  textarea {
+    width: 100%;
+    min-height: 4em;
+  }
+
+  textarea,
+  button {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .button-container {
+    text-align: right;
+  }
+}
