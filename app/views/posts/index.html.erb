@@ -5,6 +5,11 @@
 
 <% @posts.each do |post| %>
   <div class="post-container">
+    <p> 
+        <% user = User.find_by_id(post.user_id) %>
+        <%= user[:email] %> 
+    </p>
+    </br>
     <%= post.contents %>
     </br>
     <p> <%= post.created_at.strftime("%d %B %Y, %H:%M") %> </p>
