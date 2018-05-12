@@ -7,11 +7,16 @@
   <div class="post-container">
     <p> 
         <% user = User.find_by_id(post.user_id) %>
-        <%= user[:email] %> 
+        <%= user[:name] %> 
     </p>
     </br>
     <%= post.contents %>
     </br>
     <p> <%= post.created_at.strftime("%d %B %Y, %H:%M") %> </p>
+    <% if post.user_id == current_user[:id] %>
+      <%= form_tag(posts_url, method: :delete, class: 'create-post') do %>
+        <%= button_tag "Delete", name: "post_id", value: post.id %>
+      <% end %>
+    <% end %>
   </div>
 <% end %>

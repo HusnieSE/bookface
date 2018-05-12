@@ -14,6 +14,29 @@
     <div class="menu"> 
       <% if current_user %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+      
+
+        <% 
+          users = User.all
+          friends = Friendship.all
+          $stderr.puts friends.inspect
+          friends = friends.select { |f| f.friend_a.to_i ==  current_user[:id].to_i || f.friend_b.to_i ==  current_user[:id].to_i }.map(&:friend_b)
+          $stderr.puts friends.inspect
+        %>
+        <ul>
+          <% users.each do |user|%>
+            <% if current_user[:id] != user.id %>
+              <li>
+                <%= user.name %>
+                <% if !friends.include?(user.id.to_s) %>
+                  <%= form_tag(friendships_url, method: :post, class: 'create-post') do %>
+                    <%= button_tag "Add", name: "friend_b", value: user.id %>
+                  <% end %>
+                <%end%>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
       <% end %>
     </div>
     <div class="main">

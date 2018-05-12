@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   root to: redirect('/posts')
   get 'posts', to: 'posts#index'
   post 'posts', to: 'posts#create'
+  delete 'posts', to: 'posts#destroy'
+  post 'friendships', to: 'friendships#create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
