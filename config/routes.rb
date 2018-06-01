@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+
   get 'posts/index'
 
-  get 'posts/create'
+  # get 'posts/create'
 
   root to: redirect('/posts')
   get 'posts', to: 'posts#index'

@@ -2,26 +2,24 @@
 <html>
   <head>
     <title>Bookface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
   <div class="grid-container">
     <div class="header">Bookface</div>
+    <% if current_user %>
     <div class="menu"> 
-      <% if current_user %>
         <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-      
-
         <% 
           users = User.all
           friends = Friendship.all
-          $stderr.puts friends.inspect
           friends = friends.select { |f| f.friend_a.to_i ==  current_user[:id].to_i || f.friend_b.to_i ==  current_user[:id].to_i }.map(&:friend_b)
-          $stderr.puts friends.inspect
         %>
         <ul>
           <% users.each do |user|%>
@@ -37,11 +35,15 @@
             <% end %>
           <% end %>
         </ul>
-      <% end %>
     </div>
     <div class="main">
       <%= yield %>
     </div>
+    <%else%>
+      <div class="login">
+        <%= yield %>
+      </div>
+    <% end %>
   </div>
 </body>
 </html>
