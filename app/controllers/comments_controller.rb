@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
         # object = Hash.new
         # contents = params[:contents]
         # post_id = params[:post_id]
+        puts params[:contents]
         user_id = eval(params[:user_id])
         post_id = eval(params[:post_id])
         $stderr.puts post_id[:value]
@@ -16,7 +17,7 @@ class CommentsController < ApplicationController
         comment.user_id = user_id[:value]
         comment.save
         # @comments = Comment.all.order("created_at DESC")
-        # render :index
+        redirect_to '/posts'
     end
 end
   

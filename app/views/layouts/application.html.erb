@@ -4,46 +4,35 @@
     <title>Bookface</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
   </head>
 
   <body>
-  <div class="grid-container">
-    <div class="header">Bookface</div>
-    <% if current_user %>
-    <div class="menu"> 
-        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-        <% 
-          users = User.all
-          friends = Friendship.all
-          friends = friends.select { |f| f.friend_a.to_i ==  current_user[:id].to_i || f.friend_b.to_i ==  current_user[:id].to_i }.map(&:friend_b)
-        %>
-        <ul>
-          <% users.each do |user|%>
-            <% if current_user[:id] != user.id %>
-              <li>
-                <%= user.name %>
-                <% if !friends.include?(user.id.to_s) %>
-                  <%= form_tag(friendships_url, method: :post, class: 'create-post') do %>
-                    <%= button_tag "Add", name: "friend_b", value: user.id %>
-                  <% end %>
-                <%end%>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-    </div>
-    <div class="main">
-      <%= yield %>
-    </div>
-    <%else%>
-      <div class="login">
+    <div class="container-fluid">
+      
+      <% if current_user %>
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Bookface <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "pull-right" %>
+            </div>
+          </div>
+        </div>
+      <%end%>
+      <%# <div class="menu">  %>
+          
+          <%# 
+            users = User.all
+            friends = Friendship.all
+            friends = friends.select { |f| f.friend_a.to_i ==  current_user[:id].to_i || f.friend_b.to_i ==  current_user[:id].to_i }.map(&:friend_b)
+          %>
+      <%# </div> %>
+      <div class="row">
         <%= yield %>
       </div>
-    <% end %>
-  </div>
+      <%# end %>
+    </div>
 </body>
 </html>

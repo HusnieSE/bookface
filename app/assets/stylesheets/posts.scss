@@ -1,6 +1,54 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile {
+  .image {
+    span {
+      border-radius: 100%;
+      padding: 0% 1.5em 0 1.5em
+    }
+  }
+
+  .date_name {
+    margin: -5.8em 0 0 8em;
+  }
+}
+
+.posts:nth-child(2n+1) {
+  .image {
+    span {
+      background-color: #247684;
+    }
+  }
+}
+
+.posts:nth-child(2n) {
+  .image {
+    span {
+      background-color: #a53321;
+    }
+  }
+}
+
+.comment {
+  padding: 2.5em 1em 1em 1em;
+  h6 {
+    margin: -1.2em 0 0 1em;
+    background-color: gray;
+    display: inline;
+    padding: .5em;
+    border: 1px solid gray;
+    border-radius: 6px;
+    color: #fff
+  }
+  small {
+    display: block;
+    padding-left: 4.5em;
+    padding-top: 1em;
+  }
+}
+
 .post-container,
 form.create-post textarea {
   border: 1px solid #aaa;

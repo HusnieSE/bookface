@@ -1,6 +1,29 @@
 class PostsController < ApplicationController
+
   def index
-    @posts = Post.all.order("created_at DESC")
+    @posts = Post.all.order("created_at DESC").map do |p|
+      user = User.find_by_id(p.user_id)
+      comments = Comment.where(post_id: p.id).map do |c|
+        # c["name"] = User.find_by_id(c.user_id)[:name]
+        puts "#{User.find_by_id(c.user_id)[:name]}"
+        {
+          contents: c.contents,
+          name: User.find_by_id(c.user_id)[:name],
+          created_at: c.created_at,
+          user_id: c.user_id
+        }
+      end
+      puts comments.to_json
+      {
+        id: p.id,
+        content: p.contents, 
+        user: user.name,
+        user_id: p.user_id,
+        created_at: p.created_at,
+        email: user.email,
+        comments: comments
+      }
+    end
   end
 
   def create
@@ -8,7 +31,7 @@ class PostsController < ApplicationController
     post.contents = params[:contents]
     post.user_id = current_user[:id]
     post.save
-    @posts = Post.all.order("created_at DESC")
+    index
     render :index
   end
 

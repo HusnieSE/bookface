@@ -31,6 +31,10 @@ input[type=text], input[type=password], input[type=email] {
     box-sizing: border-box;
 }
 
+textarea {
+    resize: none;
+}
+
 button {
     background-color: #4CAF50;
     color: white;
