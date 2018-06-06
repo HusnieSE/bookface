@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180512074725) do
+ActiveRecord::Schema.define(version: 20180606131357) do
 
   create_table "comments", force: :cascade do |t|
     t.text "contents", null: false
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20180512074725) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.string "friend_a"
-    t.string "friend_b"
+    t.integer "friend_a"
+    t.integer "friend_b"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
