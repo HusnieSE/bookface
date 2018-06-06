@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all.order("created_at DESC").map do |p|
+    friends = Friendship.where("friend_a = #{current_user[:id]} OR friend_b = #{current_user[:id]}")
+    friends_id = friends.map { |val| val[:friend_a] == current_user[:id] ? val[:friend_a] : val[:friend_b] }
+    @friends_list = User.where(id: [friends_id])
+    friends_id << current_user[:id]
+    @users_list = User.where.not(id: [friends_id])
+    @posts = Post.where(user_id:friends_id).order("created_at DESC").map do |p|
       user = User.find_by_id(p.user_id)
       comments = Comment.where(post_id: p.id).map do |c|
         # c["name"] = User.find_by_id(c.user_id)[:name]

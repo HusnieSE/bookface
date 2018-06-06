@@ -20,7 +20,14 @@
 @import "posts.scss";
 
 body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+form {
+    border: 3px solid #f1f1f1;
+    background-color: #f1f1f1;
+
+    .field {
+        padding: 1em;
+    }
+}
 
 input[type=text], input[type=password], input[type=email] {
     width: 100%;

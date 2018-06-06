@@ -16,19 +16,12 @@
         <div class="panel panel-success">
           <div class="panel-heading">
             <div class="panel-title">
-              Bookface <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "pull-right" %>
+              Welcome <%= current_user[:name] %> !!!
+              <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "pull-right" %>
             </div>
           </div>
         </div>
       <%end%>
-      <%# <div class="menu">  %>
-          
-          <%# 
-            users = User.all
-            friends = Friendship.all
-            friends = friends.select { |f| f.friend_a.to_i ==  current_user[:id].to_i || f.friend_b.to_i ==  current_user[:id].to_i }.map(&:friend_b)
-          %>
-      <%# </div> %>
       <div class="row">
         <%= yield %>
       </div>

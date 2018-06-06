@@ -1,4 +1,23 @@
-<div class="container">
+<div class="col-md-3">
+  <ul class="col-md-12 panel panel-body">
+    <% @friends_list.each do |friend| %>
+      <li class="col-md-12">
+        <h5> <%= friend.name %> </h5> 
+      </li>
+    <%end%>
+
+    <% @users_list.each do |user| %>
+      <li class="col-md-12">
+        <h5> <%= user.name %> </h5>
+        <%= form_tag(friendships_url, method: :post) do %>
+          <input type="hidden" name="friend_b" value="<%= user.id %>"/>                                
+          <button type="submit" class="btn btn-info btn-xs col-md-6">Add as friend</button>
+        <% end %>
+      </li>
+    <%end%>
+  </ul>
+</div>
+<div class="col-md-6 col-md-offset-1">
   <div class="panel panel-success">
     <%= form_tag(posts_url, method: :post, class: 'create-post') do %>
       <textarea name="contents" placeholder="What's on your mind?"></textarea>
