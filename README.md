@@ -23,4 +23,4 @@ Things you may want to cover:
 
 * ...
 # DEMO
-` https://dashboard.heroku.com/apps/polar-castle-93629 `
+` https://polar-castle-93629.herokuapp.com/users/sign_in `
