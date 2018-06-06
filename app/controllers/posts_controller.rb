@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
 
   def index
-    puts "bakar #{current_user[:id].class}"
     friends = Friendship.where("friend_a = #{current_user[:id]} OR friend_b = #{current_user[:id]}")
     friends_id = friends.map { |val| val[:friend_a] == current_user[:id] ? val[:friend_a] : val[:friend_b] }
+    puts "IDS #{friends_id}"
     @friends_list = User.where(id: [friends_id])
     friends_id << current_user[:id]
     @users_list = User.where.not(id: [friends_id])
